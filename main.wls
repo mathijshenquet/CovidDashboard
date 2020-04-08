@@ -671,14 +671,10 @@ Row[{peakPlot,TextCell["5. We use a logistic model to estimate the progression o
 
 
 (* ::Input::Initialization:: *)
-infos["Philippines"]
-
-
-(* ::Input::Initialization:: *)
 doExport[name_]:=Block[{fileName},
 fileName="./out/"<>name<>"-"<>date<>".png";
-Export[fileName,infos[name]];
-RunProcess[{"telegram-cli","-e", "channel_list\nsend_document @covid_dashboard "<>fileName}];
+Export[fileName,Row[{Spacer[5],infos[name],Spacer[5]},ImageSize->1211]];
+(*RunProcess[{"telegram-cli","-e", "channel_list\nsend_document @covid_dashboard "<>fileName}];*)
 ]
 DeleteDirectory["./out",DeleteContents->True];CreateDirectory["./out"];
 doExport/@countries
