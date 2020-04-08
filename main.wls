@@ -2,9 +2,11 @@
 (* ::Package:: *)
 
 (* ::Input::Initialization:: *)
-scriptPath = ExpandFileName[First[$ScriptCommandLine]];
-SetDirectory[DirectoryName[scriptPath]];
 ClearAll["Global`*"]
+
+
+dir = If[Length[$ScriptCommandLine]>0,DirectoryName[ExpandFileName[First[$ScriptCommandLine]]],NotebookDirectory[]]
+SetDirectory[dir];
 
 
 (* ::Input::Initialization:: *)
@@ -671,10 +673,14 @@ Row[{peakPlot,TextCell["5. We use a logistic model to estimate the progression o
 
 
 (* ::Input::Initialization:: *)
-doExport[name_]:=Block[{fileName},
+DeleteDirectory["./out",DeleteContents->True];CreateDirectory["./out"];
+process=StartProcess["telegram-cli"];
+WriteLine[process,"channel_list"];
+doExport[name_]:=Block[{fileName,cmd},
 fileName="./out/"<>name<>"-"<>date<>".png";
 Export[fileName,Row[{Spacer[5],infos[name],Spacer[5]},ImageSize->1211]];
-(*RunProcess[{"telegram-cli","-e", "channel_list\nsend_document @covid_dashboard "<>fileName}];*)
+cmd="post_document @covid_dashboard "<>fileName;
+WriteLine[process,cmd]; 
 ]
-DeleteDirectory["./out",DeleteContents->True];CreateDirectory["./out"];
 doExport/@countries
+WriteLine[process,"safe_quit"];
