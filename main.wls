@@ -679,8 +679,11 @@ WriteLine[process,"channel_list"];
 doExport[name_]:=Block[{fileName,cmd},
 fileName="./out/"<>name<>"-"<>date<>".png";
 Export[fileName,Row[{Spacer[5],infos[name],Spacer[5]},ImageSize->1211]];
-cmd="post_document @covid_dashboard "<>fileName;
+cmd="post_document @covid_dashboard \""<>fileName<>"\"";
 WriteLine[process,cmd]; 
 ]
 doExport/@countries
 WriteLine[process,"safe_quit"];
+
+
+
