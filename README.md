@@ -10,6 +10,10 @@ The cards are generated using Mathematica code in `main.wls`.
 
 ![Netherlands March 22](https://github.com/mathijshenquet/CovidDashboard/blob/master/example/Netherlands-2020-03-22.png?raw=true)
 
+---
+
 ![Netherlands April 9](https://github.com/mathijshenquet/CovidDashboard/blob/master/example/Netherlands-2020-04-09.png?raw=true)
+
+---
 
 ![Netherlands April 25](https://github.com/mathijshenquet/CovidDashboard/blob/master/example/Netherlands-2020-04-25.png?raw=true)
